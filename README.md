@@ -18,3 +18,7 @@ proyek, lalu tuliskan teks berikut:
 * Product ID	00330-54243-22717-AAOEM
 * System type	64-bit operating system, x64-based processor
 * Pen and touch	No pen or touch input is available for this display
+
+* Node.Js v24.19.0
+* Versi npm 11.17.0
+* git version 2.54.0.windows.1
