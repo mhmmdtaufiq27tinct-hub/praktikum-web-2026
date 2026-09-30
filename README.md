@@ -1,9 +1,9 @@
 proyek, lalu tuliskan teks berikut:
 # Repositori Praktikum Pemrograman Web 2026
 **Informasi Mahasiswa:**
-* **Nama:** [Isi Nama Lengkap Anda]
-* **NIM:** [Isi NIM Anda]
-* **Kelas/Prodi:** Teknik Informatika - ITG
+* **Nama:** [Muhammad Taufiq]
+* **NIM:** [2406074]
+* **Kelas/Prodi:** Teknik Informatika C - ITG
 * **Kode MK:** IFRWP5151
 ---
 ## Catatan Modul 1
