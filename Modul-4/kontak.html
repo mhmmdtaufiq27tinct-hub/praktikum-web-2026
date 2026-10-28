@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <video class="site-background" autoplay muted loop playsinline aria-hidden="true">
+        <source src="kamisato-ayaka-windblumes-breath.3840x2160.mp4" type="video/mp4">
+    </video>
     <header>
         <h1>Formulir Kontak</h1>
+        <nav aria-label="Navigasi utama">
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kontak.html" aria-current="page">Hubungi Saya</a></li>
+                <li><a href="project.html">Proyek</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </ul>
+        </nav>
     </header>
     <hr>
     <main>
@@ -20,7 +31,7 @@
                     <input type="text" id="nama_pengirim" name="nama_pengirim">
                 </p>
                 <p>
-                    <label for="jenis_layanan">Layanan yang Dibutuhkan:</label><br></ber>
+                    <label for="jenis_layanan">Layanan yang Dibutuhkan:</label><br>
                     <select id="jenis_layanan" name="jenis_layanan">
                     <option value="">-- Pilih Layanan --</option>
                     <option value="">Hacking Account</option>
@@ -31,12 +42,12 @@
                 </p>
                 <p>
                     <label for="pesan">pesan:</label><br>
-                    <textarea id="pesanan" name="pesan" rows="6" cols="50"></textarea>
+                    <textarea id="pesan" name="pesan" rows="6" cols="50"></textarea>
                 </p>
                 <p>
                     <button type="submit">Kirim Pesan</button>
                     <button type="reset">Batal / Reset</button>
-                    <button type="back"><li><a href="index.html">Kembali</a></li></button>
+                    <a class="button-link" href="index.html">Kembali</a>
                 </p>
             </form>
         </section>
