@@ -1,11 +1,11 @@
 // File: main.js
-// Integrasi Logika Data dan Render ke Elemen DOM
+// Integrasi Logika Data, Form Handling, Filter Kategori, dan Live Search
 const projects = [
     {
         id: 1,
         title: "Sistem Inventaris Keuangan",
         category: "Web App",
-        budget: 250000,
+        budget: 2500000,
         completed: true
     },
     {
@@ -19,7 +19,7 @@ const projects = [
         id: 3,
         title: "Landing Page Profil Perusahaan",
         category: "Web App",
-        budget: 150000,
+        budget: 1500000,
         completed: false
     },
     {
@@ -28,15 +28,12 @@ const projects = [
         category: "Mobile App",
         budget: 4500000,
         completed: false
-    },
-    {
-        id: 5,
-        title: "Aplikasi Presensi Face recognition",
-        category: "Mobile App",
-        budget: 7500000,
-        completed: false
     }
 ];
+
+// State Global untuk Filter Terpadu
+let activeCategory = "Semua";
+let searchQuery = "";
 
 const formatRupiah = (angka) => {
     return new Intl.NumberFormat('id-ID', {
@@ -65,7 +62,7 @@ const renderProjects = (filteredList) => {
     if (!container) return;
 
     if (filteredList.length === 0) {
-        container.innerHTML = `<p style="text-align: center; color: #64748b; padding: 20px;">Tidak ada proyek pada kategori ini.</p>`;
+        container.innerHTML = `<p style="text-align: center; color: #64748b; padding: 20px;">Proyek tidak ditemukan.</p>`;
         return;
     }
 
@@ -89,10 +86,78 @@ const renderProjects = (filteredList) => {
     container.innerHTML = htmlString;
 };
 
+// Fungsi Utama Filter Terpadu (Kategori + Search Query)
+const applyFilters = () => {
+    const filtered = projects.filter(p => {
+        const matchesCategory = activeCategory === "Semua" || p.category === activeCategory;
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
+    renderProjects(filtered);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     renderProjects(projects);
     updateStats(projects);
 
+    // --- FITUR 1: Handling Form Submit ---
+    const projectForm = document.getElementById("project-form");
+    if (projectForm) {
+        projectForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const titleInput = document.getElementById("project-title");
+            const categoryInput = document.getElementById("project-category");
+            const budgetInput = document.getElementById("project-budget");
+            const completedInput = document.getElementById("project-completed");
+
+            const title = titleInput.value.trim();
+            const category = categoryInput.value;
+            const budget = Number(budgetInput.value);
+            const completed = completedInput.checked;
+
+            // Validasi Input
+            if (!title) {
+                alert("Judul proyek tidak boleh kosong!");
+                return;
+            }
+
+            if (isNaN(budget) || budget <= 0) {
+                alert("Estimasi anggaran harus lebih besar dari 0!");
+                return;
+            }
+
+            // Tambahkan Objek Proyek Baru
+            const newProject = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                budget: budget,
+                completed: completed
+            };
+
+            projects.push(newProject);
+
+            // Render ulang daftar & update statistik total
+            applyFilters();
+            updateStats(projects);
+
+            // Reset Form
+            projectForm.reset();
+        });
+    }
+
+    // --- FITUR 2: Pencarian Real-Time (Live Search) ---
+    const searchInput = document.getElementById("search-input");
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value.trim();
+            applyFilters();
+        });
+    }
+
+    // --- Filter Buttons Handling ---
     const filterButtons = document.querySelectorAll(".btn-filter");
     filterButtons.forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -100,13 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
             filterButtons.forEach(b => b.classList.remove("active"));
             currentBtn.classList.add("active");
 
-            const selectedCategory = currentBtn.getAttribute("data-category");
-            if (selectedCategory === "Semua") {
-                renderProjects(projects);
-            } else {
-                const filtered = projects.filter(p => p.category === selectedCategory);
-                renderProjects(filtered);
-            }
+            activeCategory = currentBtn.getAttribute("data-category");
+            applyFilters();
         });
     });
 });

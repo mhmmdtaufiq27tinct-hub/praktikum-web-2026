@@ -1,80 +1,791 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="h-full bg-slate-900 text-slate-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard Portofolio Proyek</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-</head><!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Proyek - Portofolio Saya</title>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #000 url("1317101.jpeg") center / cover fixed;
+            color: #d1d1d1;
+            line-height: 1.6;
+        }
+        body > header {
+            background: rgba(59, 55, 55, .993);
+            padding: 20px;
+            border-bottom: 5px solid #0f0f0f;
+        }
+        body > header h1, body > header nav { max-width: 900px; margin: auto; }
+        body > header h1 { color: white; font-size: 1.8rem; }
+        body > header nav ul { display: flex; flex-direction: row; gap: 20px; list-style: none; }
+        body > header nav a { color: #c5c5c5; text-decoration: none; }
+        body > header nav a:hover { color: #d50dfd; }
+        .page-container { max-width: 900px; padding: 0 20px; gap: 24px; }
+        .dashboard-heading { background: rgba(77, 75, 75, .94); padding: 25px; border-bottom: 3px solid #fd6d0d; }
+        .glass-panel { background: rgba(77, 75, 75, .94); border-color: rgba(255,255,255,.12); backdrop-filter: blur(5px); }
+        .project-form-panel { position: static; }
+        .stats-card { background: rgba(77, 75, 75, .94); }
+        @media (max-width: 700px) {
+            body > header nav ul { flex-direction: column; gap: 8px; }
+            .page-container { margin-top: 20px; }
+            .dashboard-heading { padding: 20px; }
+        }
+    </style>
+    <style>
+        /* Custom scrollbar & glassmorphism utilities */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+    <style>
+        /* Samakan nuansa halaman proyek dengan beranda. */
+        body, body.bg-slate-950 {
+            background: #000 url("1317101.jpeg") center / cover fixed;
+            color: #d1d1d1;
+            font-family: Arial, sans-serif;
+        }
+        body > header:not(.dashboard-heading) {
+            background: rgba(59, 55, 55, .993);
+            padding: 20px;
+            border-bottom: 5px solid #0f0f0f;
+        }
+        body > header:not(.dashboard-heading) h1,
+        body > header:not(.dashboard-heading) nav { max-width: 900px; margin: auto; }
+        body > header:not(.dashboard-heading) h1 { color: white; font-size: 1.8rem; }
+        body > header:not(.dashboard-heading) nav ul { display: flex; flex-direction: row; gap: 20px; list-style: none; }
+        body > header:not(.dashboard-heading) nav a { color: #9c9a9a; text-decoration: none; }
+        body > header:not(.dashboard-heading) nav a:hover { color: #d50dfd; }
+        .page-container { max-width: 940px; padding: 0 20px; gap: 24px; }
+        .dashboard-heading {
+            display: block;
+            background: rgba(77, 75, 75, .94);
+            padding: 25px;
+            border: 0;
+            border-bottom: 3px solid #fd6d0d;
+        }
+        .dashboard-heading > div:first-child > div { align-items: flex-start; }
+        .dashboard-heading > div:first-child > div > div:first-child { display: none; }
+        .dashboard-heading h1 { color: white; font-size: 1.8rem; font-weight: 700; }
+        .dashboard-heading p { color: #d1d1d1; }
+        .glass-panel, .stats-card {
+            background: rgba(77, 75, 75, .94);
+            border-color: rgba(255,255,255,.12);
+            backdrop-filter: blur(5px);
+        }
+        .project-form-panel { position: static; }
+        main.grid { max-width: none; margin: 0; padding: 0; }
+        aside.project-form-panel { max-width: none; margin: 0; border-left: 0; }
+        footer { color: #aaa; }
+        @media (max-width: 700px) {
+            body > header:not(.dashboard-heading) nav ul { flex-direction: column; gap: 8px; }
+            .page-container { margin-top: 20px; }
+            .dashboard-heading { padding: 20px; }
+        }
+    </style>
 </head>
-<body>
+<body class="h-full flex flex-col font-sans antialiased bg-slate-950 text-slate-100 selection:bg-sky-500 selection:text-white">
 
-    <!-- Navigasi -->
     <header>
-        <h1>Portofolio Saya</h1>
-        <nav>
+        <h1>Portofolio Pengembangan Web</h1>
+        <nav aria-label="Navigasi utama">
             <ul>
                 <li><a href="index.html">Beranda</a></li>
                 <li><a href="kontak.html">Hubungi Saya</a></li>
-                <li><a href="project.html">Proyek</a></li>
+                <li><a href="project.html" aria-current="page">Proyek</a></li>
                 <li><a href="resume.html">Resume</a></li>
             </ul>
         </nav>
     </header>
 
-    <hr>
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
 
-    <!-- Konten Utama -->
-    <main>
-        <section>
-            <h2>Daftar Proyek</h2>
-            <p>Berikut adalah beberapa proyek yang telah saya kerjakan:</p>
+    <!-- Main Container -->
+    <div class="page-container min-h-screen flex flex-col w-full mx-auto py-8 gap-8">
+        
+        <!-- Header Section -->
+        <header class="dashboard-heading flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+            <div>
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                        <i class="fa-solid fa-diagram-project text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Dashboard Portofolio Proyek</h1>
+                        <p class="text-slate-400 text-sm mt-0.5">Kelola, lacak, dan analisis estimasi anggaran proyek Anda secara real-time.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 self-start md:self-auto">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistem Aktif
+                </span>
+            </div>
+        </header>
 
-            <!-- Proyek 1 -->
-            <article>
-                <h3>1. Aplikasi Website E-Commerce</h3>
-                <p><strong>Deskripsi:</strong> Website toko online sederhana dengan fitur katalog produk dan keranjang belanja.</p>
-                <p><strong>Teknologi:</strong> HTML, CSS, JavaScript</p>
-                <p><a href="#" target="_blank">Lihat Kode / Demo</a></p>
-            </article>
+        <!-- Stats Section (Kartu Statistik) -->
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
+            <!-- Total Proyek -->
+            <div class="glass-panel stats-card p-6 rounded-2xl flex items-center justify-between shadow-xl transition-all hover:border-slate-700">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Total Proyek</p>
+                    <h3 id="stat-total-projects" class="text-3xl font-extrabold text-white">0</h3>
+                    <p class="text-xs text-slate-500 mt-1">Item terdaftar dalam portofolio</p>
+                </div>
+                <div class="p-3.5 bg-blue-500/10 text-blue-400 rounded-2xl border border-blue-500/20">
+                    <i class="fa-solid fa-folder-open text-2xl"></i>
+                </div>
+            </div>
 
-            <hr>
+            <!-- Total Anggaran -->
+            <div class="glass-panel stats-card p-6 rounded-2xl flex items-center justify-between shadow-xl transition-all hover:border-slate-700">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Total Anggaran</p>
+                    <h3 id="stat-total-budget" class="text-2xl sm:text-3xl font-extrabold text-emerald-400 truncate max-w-[200px]">Rp 0</h3>
+                    <p class="text-xs text-slate-500 mt-1">Akumulasi estimasi nilai</p>
+                </div>
+                <div class="p-3.5 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20">
+                    <i class="fa-solid fa-wallet text-2xl"></i>
+                </div>
+            </div>
 
-            <!-- Proyek 2 -->
-            <article>
-                <h3>2. Sistem Informasi Perpustakaan</h3>
-                <p><strong>Deskripsi:</strong> Aplikasi berbasis web untuk mengelola peminjaman dan pengembalian buku.</p>
-                <p><strong>Teknologi:</strong> HTML, PHP, MySQL</p>
-                <p><a href="#" target="_blank">Lihat Kode / Demo</a></p>
-            </article>
-
-            <hr>
-
-            <!-- Proyek 3 -->
-            <article>
-                <h3>3. Website Portofolio Pribadi</h3>
-                <p><strong>Deskripsi:</strong> Website untuk menampilkan profil, keahlian, dan hasil karya saya.</p>
-                <p><strong>Teknologi:</strong> HTML, CSS</p>
-                <p><a href="#" target="_blank">Lihat Kode / Demo</a></p>
-            </article>
+            <!-- Proyek Selesai -->
+            <div class="glass-panel stats-card p-6 rounded-2xl flex items-center justify-between shadow-xl transition-all hover:border-slate-700">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Proyek Selesai</p>
+                    <h3 id="stat-completed-projects" class="text-3xl font-extrabold text-indigo-400">0</h3>
+                    <p class="text-xs text-slate-500 mt-1">Status terselesaikan</p>
+                </div>
+                <div class="p-3.5 bg-indigo-500/10 text-indigo-400 rounded-2xl border border-indigo-500/20">
+                    <i class="fa-solid fa-circle-check text-2xl"></i>
+                </div>
+            </div>
         </section>
-    </main>
 
-    <hr>
+        <!-- Layout Grid: Form (Kiri) & List Proyek (Kanan) -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- FITUR 1: Formulir Input Proyek Dinamis -->
+            <aside class="project-form-panel lg:col-span-5 glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl sticky top-8">
+                <div class="flex items-center gap-2 mb-6 border-b border-slate-800 pb-4">
+                    <i class="fa-solid fa-square-plus text-sky-400 text-lg"></i>
+                    <h2 class="text-lg font-bold text-white">Tambah Proyek Baru</h2>
+                </div>
 
-    <!-- Footer -->
+                <form id="project-form" class="space-y-5" novalidate>
+                    <!-- Judul Proyek -->
+                    <div>
+                        <label for="project-title" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                            Judul Proyek <span class="text-rose-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-500">
+                                <i class="fa-solid fa-pen-nib text-sm"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="project-title" 
+                                class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all"
+                                placeholder="Contoh: Redesign Aplikasi e-Commerce"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Kategori Proyek -->
+                    <div>
+                        <label for="project-category" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                            Kategori <span class="text-rose-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-500">
+                                <i class="fa-solid fa-layer-group text-sm"></i>
+                            </span>
+                            <select 
+                                id="project-category" 
+                                class="w-full pl-10 pr-10 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all appearance-none cursor-pointer"
+                            >
+                                <option value="Web App">Web App</option>
+                                <option value="Mobile App">Mobile App</option>
+                                <option value="Desktop App">Desktop App</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                            </select>
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-500">
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Estimasi Anggaran -->
+                    <div>
+                        <label for="project-budget" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                            Estimasi Anggaran (Rp) <span class="text-rose-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-500">
+                                <i class="fa-solid fa-money-bill-wave text-sm"></i>
+                            </span>
+                            <input 
+                                type="number" 
+                                id="project-budget" 
+                                min="1"
+                                step="1"
+                                class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all"
+                                placeholder="Nominal angka, misal: 5000000"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Checkbox Status -->
+                    <div class="pt-1">
+                        <label class="relative flex items-center gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-900/80 transition-colors">
+                            <input 
+                                type="checkbox" 
+                                id="project-completed" 
+                                class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-sky-500 focus:ring-sky-500/40 focus:ring-offset-slate-900 cursor-pointer"
+                            />
+                            <span class="text-xs font-medium text-slate-300 select-none">
+                                Tandai sebagai <strong class="text-emerald-400 font-semibold">Sudah Selesai</strong>
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        class="w-full py-3 px-4 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-sky-500/20 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2"
+                    >
+                        <i class="fa-solid fa-plus"></i> Tambah ke Portofolio
+                    </button>
+                </form>
+            </aside>
+
+            <!-- Kanan: Filters, Search & Daftar Kartu Proyek -->
+            <section class="lg:col-span-7 flex flex-col gap-6">
+                
+                <!-- Controls Bar (Live Search & Filter Buttons) -->
+                <div class="glass-panel p-5 rounded-2xl flex flex-col gap-4">
+                    
+                    <!-- FITUR 2: Live Search Input -->
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                        </span>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Cari berdasarkan nama atau kata kunci proyek..." 
+                            class="w-full pl-10 pr-10 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all"
+                        />
+                        <button 
+                            id="clear-search-btn" 
+                            class="hidden absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-white"
+                            title="Bersihkan pencarian"
+                        >
+                            <i class="fa-solid fa-xmark text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- Filter Category Buttons -->
+                    <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-800/80">
+                        <span class="text-xs font-semibold text-slate-400 mr-1 uppercase tracking-wider">Kategori:</span>
+                        <button class="btn-filter px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-sky-500 text-white shadow-md shadow-sky-500/20" data-category="Semua">
+                            Semua
+                        </button>
+                        <button class="btn-filter px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white" data-category="Web App">
+                            Web App
+                        </button>
+                        <button class="btn-filter px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white" data-category="Mobile App">
+                            Mobile App
+                        </button>
+                        <button class="btn-filter px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white" data-category="Desktop App">
+                            Desktop App
+                        </button>
+                        <button class="btn-filter px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white" data-category="UI/UX Design">
+                            UI/UX Design
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section Header for List -->
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-400">
+                        Daftar Proyek <span id="project-count-badge" class="ml-2 px-2 py-0.5 rounded-full bg-slate-800 text-sky-400 text-xs font-bold border border-slate-700">0</span>
+                    </h3>
+                </div>
+
+                <!-- Container Kartu Proyek -->
+                <div id="project-list" class="flex flex-col gap-4">
+                    <!-- Dynamic Items render here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
     <footer>
-        <p>&copy; 2026 Muhammad Taufiq. Hak Cipta Dilindungi.</p>
+        <p>&copy; 2026 Portofolio Mahasiswa - All Right Reserved.</p>
     </footer>
 
-</body>
-</html>
-<body>
-    
+    <!-- Modal Konfirmasi Hapus -->
+    <div id="delete-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl transform scale-95 transition-transform duration-200" id="delete-modal-content">
+            <div class="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-center text-white mb-2">Hapus Proyek Ini?</h3>
+            <p class="text-xs text-slate-400 text-center mb-6">Tindakan ini akan menghapus data proyek dari daftar portofolio secara permanen.</p>
+            <div class="flex items-center gap-3">
+                <button id="cancel-delete-btn" class="flex-1 py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-xl transition-colors">
+                    Batal
+                </button>
+                <button id="confirm-delete-btn" class="flex-1 py-2.5 px-4 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs rounded-xl shadow-lg shadow-rose-600/20 transition-colors">
+                    Ya, Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initial Mock Data (Sesuai spesifikasi latihan sebelumnya)
+        let projects = [
+            {
+                id: 1,
+                title: "Sistem Inventaris Keuangan",
+                category: "Web App",
+                budget: 2500000,
+                completed: true
+            },
+            {
+                id: 2,
+                title: "Sistem Kasir Digital POS",
+                category: "Desktop App",
+                budget: 5000000,
+                completed: true
+            },
+            {
+                id: 3,
+                title: "Landing Page Profil Perusahaan",
+                category: "Web App",
+                budget: 1500000,
+                completed: false
+            },
+            {
+                id: 4,
+                title: "Aplikasi Presensi GPS Mobile",
+                category: "Mobile App",
+                budget: 4500000,
+                completed: false
+            }
+        ];
+
+        // State Global Aplikasi
+        let activeCategory = "Semua";
+        let searchQuery = "";
+        let projectToDeleteId = null;
+
+        // Utility: Toast Notification System (Menggantikan alert biasa)
+        const showToast = (message, type = 'info') => {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            
+            let bgStyle = 'bg-slate-800 border-slate-700 text-slate-100';
+            let iconClass = 'fa-circle-info text-sky-400';
+
+            if (type === 'success') {
+                bgStyle = 'bg-slate-800 border-emerald-500/30 text-slate-100';
+                iconClass = 'fa-circle-check text-emerald-400';
+            } else if (type === 'danger') {
+                bgStyle = 'bg-slate-800 border-rose-500/30 text-slate-100';
+                iconClass = 'fa-trash-can text-rose-400';
+            } else if (type === 'warning') {
+                bgStyle = 'bg-slate-800 border-amber-500/30 text-slate-100';
+                iconClass = 'fa-triangle-exclamation text-amber-400';
+            }
+
+            toast.className = `pointer-events-auto flex items-center gap-3 p-4 rounded-xl border shadow-xl text-xs font-medium transform transition-all duration-300 translate-y-2 opacity-0 ${bgStyle}`;
+            toast.innerHTML = `
+                <i class="fa-solid ${iconClass} text-base shrink-0"></i>
+                <span class="flex-1">${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Animate In
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            // Auto Remove after 3s
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        };
+
+        // Utility: Format Rupiah (Intl.NumberFormat)
+        const formatRupiah = (angka) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0
+            }).format(angka);
+        };
+
+        // Kategori Color Badge Map
+        const getCategoryBadgeClass = (category) => {
+            switch (category) {
+                case 'Web App':
+                    return 'bg-sky-500/10 text-sky-400 border-sky-500/20';
+                case 'Mobile App':
+                    return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
+                case 'Desktop App':
+                    return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+                case 'UI/UX Design':
+                    return 'bg-pink-500/10 text-pink-400 border-pink-500/20';
+                default:
+                    return 'bg-slate-500/10 text-slate-400 border-slate-500/20';
+            }
+        };
+
+        // Pembaruan Angka Kartu Statistik
+        const updateStats = (dataList) => {
+            const totalProjects = dataList.length;
+            const totalBudget = dataList.reduce((acc, curr) => acc + (Number(curr.budget) || 0), 0);
+            const completedCount = dataList.filter(item => item.completed).length;
+
+            const elTotal = document.getElementById("stat-total-projects");
+            const elBudget = document.getElementById("stat-total-budget");
+            const elCompleted = document.getElementById("stat-completed-projects");
+
+            if (elTotal) elTotal.textContent = totalProjects;
+            if (elBudget) elBudget.textContent = formatRupiah(totalBudget);
+            if (elCompleted) elCompleted.textContent = completedCount;
+        };
+
+        // FITUR 3 (a): Toggle Status Proyek
+        const toggleStatus = (id) => {
+            projects = projects.map(proj => {
+                if (proj.id === id) {
+                    const updatedState = !proj.completed;
+                    showToast(
+                        `Status "${proj.title}" diubah menjadi ${updatedState ? 'Selesai' : 'Dalam Pengerjaan'}`, 
+                        updatedState ? 'success' : 'warning'
+                    );
+                    return { ...proj, completed: updatedState };
+                }
+                return proj;
+            });
+
+            applyFiltersAndRender();
+            updateStats(projects);
+        };
+
+        // FITUR 3 (b): Modal Konfirmasi & Hapus Data
+        const openDeleteModal = (id) => {
+            projectToDeleteId = id;
+            const modal = document.getElementById("delete-modal");
+            const content = document.getElementById("delete-modal-content");
+            if (modal) {
+                modal.classList.remove("hidden");
+                requestAnimationFrame(() => {
+                    modal.classList.remove("opacity-0");
+                    content.classList.remove("scale-95");
+                });
+            }
+        };
+
+        const closeDeleteModal = () => {
+            const modal = document.getElementById("delete-modal");
+            const content = document.getElementById("delete-modal-content");
+            if (modal) {
+                modal.classList.add("opacity-0");
+                content.classList.add("scale-95");
+                setTimeout(() => {
+                    modal.classList.add("hidden");
+                    projectToDeleteId = null;
+                }, 200);
+            }
+        };
+
+        const confirmDeleteProject = () => {
+            if (!projectToDeleteId) return;
+
+            const projToDelete = projects.find(p => p.id === projectToDeleteId);
+            const title = projToDelete ? projToDelete.title : "Proyek";
+
+            // Saring array untuk hapus item
+            projects = projects.filter(proj => proj.id !== projectToDeleteId);
+
+            closeDeleteModal();
+            applyFiltersAndRender();
+            updateStats(projects);
+            showToast(`Proyek "${title}" berhasil dihapus`, 'danger');
+        };
+
+        // Render Kartu Proyek ke DOM
+        const renderProjects = (filteredList) => {
+            const container = document.getElementById("project-list");
+            const countBadge = document.getElementById("project-count-badge");
+            
+            if (countBadge) countBadge.textContent = filteredList.length;
+            if (!container) return;
+
+            if (filteredList.length === 0) {
+                container.innerHTML = `
+                    <div class="glass-panel p-8 rounded-2xl text-center border border-dashed border-slate-800 flex flex-col items-center justify-center gap-3">
+                        <div class="p-4 bg-slate-900 rounded-full text-slate-600">
+                            <i class="fa-solid fa-folder-open text-3xl"></i>
+                        </div>
+                        <p class="text-slate-400 text-sm font-medium">Tidak ada proyek yang sesuai dengan kriteria.</p>
+                        <p class="text-xs text-slate-600">Coba ubah kata kunci pencarian atau kategori filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const htmlString = filteredList.map(proj => {
+                const badgeClass = proj.completed 
+                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
+                    : "bg-amber-500/10 text-amber-400 border-amber-500/20";
+                
+                const statusIcon = proj.completed ? "fa-circle-check" : "fa-clock";
+                const statusText = proj.completed ? "Selesai" : "Dalam Pengerjaan";
+                const categoryClass = getCategoryBadgeClass(proj.category);
+
+                return `
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800/90 shadow-lg hover:border-slate-700 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group">
+                        
+                        <!-- Informasi Utama Proyek -->
+                        <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="px-2.5 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider border ${categoryClass}">
+                                    ${proj.category}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider border ${badgeClass} flex items-center gap-1">
+                                    <i class="fa-solid ${statusIcon} text-[9px]"></i> ${statusText}
+                                </span>
+                            </div>
+                            <h4 class="text-base font-bold text-white group-hover:text-sky-400 transition-colors truncate">
+                                ${proj.title}
+                            </h4>
+                            <p class="text-sm font-medium text-emerald-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-tag text-xs text-emerald-500/70"></i>
+                                ${formatRupiah(proj.budget)}
+                            </p>
+                        </div>
+
+                        <!-- Tombol Aksi Interaktif (Fitur 3) -->
+                        <div class="flex items-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-800/80 shrink-0">
+                            <!-- (a) Tombol Ubah Status -->
+                            <button 
+                                onclick="toggleStatus(${proj.id})" 
+                                class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border flex items-center justify-center gap-1.5 ${
+                                    proj.completed 
+                                    ? 'bg-amber-500/10 text-amber-300 border-amber-500/20 hover:bg-amber-500/20' 
+                                    : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20 hover:bg-emerald-500/20'
+                                }"
+                                title="Ubah status pengerjaan"
+                            >
+                                <i class="fa-solid ${proj.completed ? 'fa-rotate-left' : 'fa-check'} text-xs"></i>
+                                <span>${proj.completed ? 'Batalkan Selesai' : 'Ubah ke Selesai'}</span>
+                            </button>
+
+                            <!-- (b) Tombol Hapus Proyek -->
+                            <button 
+                                onclick="openDeleteModal(${proj.id})" 
+                                class="px-3 py-2 rounded-xl text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 hover:text-rose-300 transition-all duration-200 flex items-center justify-center gap-1.5"
+                                title="Hapus proyek"
+                            >
+                                <i class="fa-solid fa-trash-can text-xs"></i>
+                                <span class="inline sm:hidden lg:inline">Hapus</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            container.innerHTML = htmlString;
+        };
+
+        // FITUR 2: Fungsi Penyaringan Terpadu (Live Search + Kategori)
+        const applyFiltersAndRender = () => {
+            const filtered = projects.filter(p => {
+                const matchesCategory = activeCategory === "Semua" || p.category === activeCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            renderProjects(filtered);
+        };
+
+        // Inisialisasi Event Listeners setelah DOM Siap
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initial Render
+            applyFiltersAndRender();
+            updateStats(projects);
+
+            // --- FITUR 1: Form Handling & Validation ---
+            const projectForm = document.getElementById("project-form");
+            if (projectForm) {
+                projectForm.addEventListener("submit", (e) => {
+                    e.preventDefault(); // Cegah reload halaman
+
+                    const titleInput = document.getElementById("project-title");
+                    const categoryInput = document.getElementById("project-category");
+                    const budgetInput = document.getElementById("project-budget");
+                    const completedInput = document.getElementById("project-completed");
+
+                    const title = titleInput.value.trim();
+                    const category = categoryInput.value;
+                    const budget = Number(budgetInput.value);
+                    const completed = completedInput.checked;
+
+                    // Validasi: Judul tidak boleh kosong
+                    if (!title) {
+                        showToast("Judul proyek tidak boleh kosong!", "warning");
+                        titleInput.focus();
+                        return;
+                    }
+
+                    // Validasi: Anggaran harus angka & lebih besar dari 0
+                    if (isNaN(budget) || budget <= 0) {
+                        showToast("Estimasi anggaran harus berupa angka lebih besar dari 0!", "warning");
+                        budgetInput.focus();
+                        return;
+                    }
+
+                    // Buat Objek Proyek Baru dengan id unik Date.now()
+                    const newProject = {
+                        id: Date.now(),
+                        title: title,
+                        category: category,
+                        budget: budget,
+                        completed: completed
+                    };
+
+                    // Masukkan ke array menggunakan spread operator
+                    projects = [newProject, ...projects];
+
+                    // Render ulang daftar & update statistik
+                    applyFiltersAndRender();
+                    updateStats(projects);
+
+                    // Reset Form
+                    projectForm.reset();
+
+                    showToast(`Proyek "${title}" berhasil ditambahkan!`, "success");
+                });
+            }
+
+            // --- FITUR 2: Live Search Event Listener ---
+            const searchInput = document.getElementById("search-input");
+            const clearSearchBtn = document.getElementById("clear-search-btn");
+
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    searchQuery = e.target.value;
+                    
+                    if (clearSearchBtn) {
+                        if (searchQuery.length > 0) {
+                            clearSearchBtn.classList.remove("hidden");
+                        } else {
+                            clearSearchBtn.classList.add("hidden");
+                        }
+                    }
+
+                    applyFiltersAndRender();
+                });
+            }
+
+            if (clearSearchBtn) {
+                clearSearchBtn.addEventListener("click", () => {
+                    if (searchInput) {
+                        searchInput.value = "";
+                        searchQuery = "";
+                        clearSearchBtn.classList.add("hidden");
+                        applyFiltersAndRender();
+                        searchInput.focus();
+                    }
+                });
+            }
+
+            // --- Filter Buttons Event Handling ---
+            const filterButtons = document.querySelectorAll(".btn-filter");
+            filterButtons.forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    const currentBtn = e.currentTarget;
+                    
+                    filterButtons.forEach(b => {
+                        b.classList.remove("bg-sky-500", "text-white", "shadow-md", "shadow-sky-500/20");
+                        b.classList.add("bg-slate-800", "text-slate-300");
+                    });
+
+                    currentBtn.classList.remove("bg-slate-800", "text-slate-300");
+                    currentBtn.classList.add("bg-sky-500", "text-white", "shadow-md", "shadow-sky-500/20");
+
+                    activeCategory = currentBtn.getAttribute("data-category");
+                    applyFiltersAndRender();
+                });
+            });
+
+            // Modal Delete Buttons Event Listeners
+            const cancelDeleteBtn = document.getElementById("cancel-delete-btn");
+            const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
+
+            if (cancelDeleteBtn) cancelDeleteBtn.addEventListener("click", closeDeleteModal);
+            if (confirmDeleteBtn) confirmDeleteBtn.addEventListener("click", confirmDeleteProject);
+        });
+    </script>
 </body>
 </html>
